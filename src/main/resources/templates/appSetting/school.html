@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>School Registration</title>
+    <!-- Add any CSS or JS files here -->
+    <head th:insert="Fragments/fragment::head"></head>
+</head>
+<body>
+<h1>Register School</h1>
+
+<!-- Form starts here -->
+<form th:action="@{/school/save}" th:object="${schoolDTO}" method="post">
+    <div>
+        <label for="name">School Name:</label>
+        <input type="text" id="name" th:field="*{name}" placeholder="Enter school name" required/>
+    </div>
+    <div>
+        <label for="url_logo">Logo URL:</label>
+        <input type="text" id="url_logo" th:field="*{url_logo}" />
+    </div>
+
+
+
+
+    <div class="form-actions">
+        <input type="submit" class="btn-save" value="Register"/>
+    </div>
+</form>
+</body>
+</html>

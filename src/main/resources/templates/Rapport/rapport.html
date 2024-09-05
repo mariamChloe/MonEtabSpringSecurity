@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="fr"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:insert="Fragments/fragment::head">
+
+</head>
+<body>
+
+<div class="sidebar"  th:insert="Fragments/fragment::sidebar">
+
+</div>
+
+<div class="content">
+    <div class="back-button" style="justify-content: flex-end;" >
+        <a th:href="@{/Students}"><i class="fas fa-arrow-left"></i> Retour</a>
+    </div>
+
+    <div class="form-container">
+        <h1>Rapport</h1>
+
+        <div class="form-group">
+            <label for="classe">Sélectionner une option</label>
+            <select id="classe" name="classe">
+                <option value="6eme" disabled selected>Selectionnez une option</option>
+                <option value="6eme">Listes des élèves </option>
+                <option value="5eme">Listes des professeurs</option>
+                <option value="4eme">Listes des Utilisateurs</option>
+            </select>
+        </div>
+
+        <div class="form-actions">
+            <button class="btn-cancel" onclick="confirmCancel()">Générer en format pdf</button>
+            <button class="btn-save">Générer en format Excel</button>
+        </div>
+    </div>
+</div>
+</body>
+</html>

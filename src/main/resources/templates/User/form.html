@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="fr"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head th:insert="Fragments/fragment::head">
+
+</head>
+<body>
+
+<div class="sidebar"  th:insert="Fragments/fragment::sidebar">
+
+</div>
+
+    <div class="content">
+        <div class="back-button" style="justify-content: flex-end;" >
+            <a th:href="@{/Users}"><i class="fas fa-arrow-left"></i> Retour</a>
+        </div>
+
+        <form class="form-container" th:object="${users}" th:action="@{/Users}" method="post">
+
+            <h1 th:text="${users.id == null}?'Ajouter Utilisateur':'Modifier utilisateur'"></h1>
+
+            <input th:field="*{id}" hidden type="text">
+
+            <div class="form-group">
+                <label for="nom">Pseudo</label>
+                <input th:field="*{pseudo}" type="text" id="nom" name="nom">
+            </div>
+
+            <div class="form-group">
+                <label for="password">Mot de passe</label>
+                <input th:field="*{password}" type="password" id="password" name="password">
+            </div>
+
+            <div class="form-group">
+                <label for="confirmPassword">Confirmez le mot de passe</label>
+                <input type="password" id="confirmPassword" name="confirmPassword">
+            </div>
+
+            <!-- Affichage du message d'erreur en cas de non-correspondance des mots de passe -->
+            <div th:if="${passwordMismatch}" style="color: red;">
+                Les mots de passe ne correspondent pas.
+            </div>
+
+            <div class="form-actions">
+                <button class="btn-cancel" type="button" onclick="confirmCancel()">Annuler</button>
+                <button class="btn-save" type="submit">Enregistrer</button>
+            </div>
+        </form>
+
+    </div>
+</body>
+</html>

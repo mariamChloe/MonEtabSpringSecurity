@@ -1,0 +1,87 @@
+ <!DOCTYPE html>
+<html lang="fr"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:insert="Fragments/fragment::head">
+
+</head>
+<body>
+
+<div class="sidebar"  th:insert="Fragments/fragment::sidebar">
+
+</div>
+
+    <div class="content1">
+        <div class="back-button">
+            <h1 style="color:black;">Professseurs(<span th:text="${teachers.size()}"></span>)</h1>
+            <a th:href="@{/Teachers/show_add_Teacher_form}"><i class="fas fa-arrow-left"></i>Nouveau Professeur</a>
+        </div>
+        <table>
+            <thead>
+                <tr >
+                    <th>Nom</th>
+                    <th>Prénom</th>
+                    <th>Genre</th>
+                    <th>Matière</th>
+                    <th>Vacant</th>
+                    <th>Age</th>
+                    <th>Téléphone</th>
+                    <th>Ville</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="teacher:${teachers}">
+                    <td th:text="${teacher.getNom}"></td>
+                    <td th:text="${teacher.getPrenom}"></td>
+                    <td th:text="${teacher.getGenre}"></td>
+                    <td th:text="${teacher.getMatiere}"></td>
+                    <td th:text="${teacher.vacant}"></td>
+                    <td>25</td>
+                    <td th:text="${teacher.getTelephone}">0784545498</td>
+                    <td th:text="${teacher.getVille}">0784545498</td>
+                    <td>
+                        <button style="background-color: rgba(255, 217, 0, 0.897);">
+                            <a th:href="@{/Teachers/updateTeacher/{id}(id=${teacher.id})}">Modifier</a>
+                        </button>
+                        <button class="delete-icon" style="background-color: rgb(212, 21, 21);" th:data-id="${teacher.id}">Supprimer</button>
+                    </td>
+
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+<div id="confirmationPopup" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background-color:rgba(0, 0, 0, 0.5); align-items:center; justify-content:center;">
+    <div class="confirmation-container" style="background-color:white; padding:20px; border-radius:5px; text-align:center;">
+        <h2>Êtes-vous sûr de vouloir supprimer ce professeur ?</h2>
+        <form id="deleteForm" method="POST">
+            <button type="submit" class="btn-confirm" style="background-color: red; color: white;">Confirmer</button>
+            <button type="button" class="btn-cancel" style="background-color: gray; color: white;" onclick="closePopup()">Annuler</button>
+        </form>
+    </div>
+</div>
+
+<script>
+            document.addEventListener('DOMContentLoaded', function() {
+        const deleteIcons = document.querySelectorAll('.delete-icon');
+        const popup = document.getElementById('confirmationPopup');
+        const deleteForm = document.getElementById('deleteForm');
+
+        deleteIcons.forEach(icon => {
+            icon.addEventListener('click', function() {
+                const id = this.getAttribute('data-id');
+                deleteForm.action = `/Teachers/deleteTeacher/${id}`;
+                popup.style.display = 'flex';
+            });
+        });
+        });
+
+        function closePopup() {
+        document.getElementById('confirmationPopup').style.display = 'none';
+        }
+
+</script>
+    <script src="scripte.js"></script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="fr"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head th:insert="Fragments/fragment::head">
+
+</head>
+
+<body style="background-color: #555;">
+    <div class="container">
+        <div class="login-box">
+            <div class="logo">
+                <img src="image/logo.jpg" alt="Logo" />
+                <h1>Mon Etab</h1>
+            </div>
+            <form method="POST" th:action="@{/Auth}">
+                <div class="input-group">
+                    <label for="username">Identifiant</label>
+                    <input type="text" id="username" name="username" required>
+                </div>
+                <div class="input-group">
+                    <label for="password">Mot de passe</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <button type="submit" class="login-btn">Connexion</button>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>

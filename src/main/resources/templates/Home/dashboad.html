@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="fr"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:insert="Fragments/fragment::head">
+
+</head>
+<body>
+    <div class="sidebar" th:insert="Fragments/fragment::sidebar">
+
+    </div>
+
+    <div class="content">
+        <div class="back-button" style="justify-content: flex-start;" >
+            <h1 style="color:black;">Tableau de bord</h1>
+        </div>
+        <div class="card-container">
+            <div class="card">Nombre d'élèves<br>128 100</div>
+            <div class="card">Nombre de professeurs<br>128 100</div>
+            <div class="card">Nombre d'utilisateurs<br>128 100</div>
+            <div class="card">
+                <canvas id="pie-chart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <!-- Insertion du fragment script -->
+    <th:block th:insert="fragments/fragment::script"></th:block>
+</body>
+</html>

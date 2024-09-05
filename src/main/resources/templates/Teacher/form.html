@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head th:insert="Fragments/fragment::head"></head>
+<body>
+
+<div class="sidebar" th:insert="Fragments/fragment::sidebar"></div>
+
+<div class="content">
+    <div class="back-button" style="justify-content: flex-end;">
+        <a th:href="@{/Teachers}"><i class="fas fa-arrow-left"></i> Retour</a>
+    </div>
+    <form class="form-container" th:object="${teachers}" th:action="@{/Teachers}" method="post">
+        <h1 th:text="${teachers.id == null}?'Ajouter professeur':'Modifier professeur'"></h1>
+
+        <input th:field="*{id}" hidden type="text">
+
+        <div class="form-group">
+            <label for="nom">Nom</label>
+            <input th:field="*{nom}" type="text" id="nom" name="nom">
+        </div>
+
+        <div class="form-group">
+            <label for="prenom">Prénom</label>
+            <input th:field="*{prenom}" type="text" id="prenom" name="prenom">
+        </div>
+
+        <div class="form-group gender">
+            <label>Genre</label>
+            <div>
+                <input th:field="*{genre}" type="radio" id="homme" name="sexe" value="M">
+                <label for="homme">Homme</label>
+            </div>
+            <div>
+                <input th:field="*{genre}" type="radio" id="femme" name="sexe" value="F">
+                <label for="femme">Femme</label>
+            </div>
+        </div>
+
+        <div class="form-group gender">
+            <label>Êtes-vous disponible ?</label>
+            <div>
+                <input th:field="*{vacant}" type="radio" id="faux" name="faux" value="false">
+                <label for="faux">Non</label>
+            </div>
+            <div>
+                <input th:field="*{vacant}" type="radio" id="vrai" name="vrai" value="true">
+                <label for="vrai">Oui</label>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="classe">Sélectionner une matière</label>
+            <select th:field="*{matiere}" id="classe" name="classe">
+                <option value="" disabled selected>Sélectionner unematière</option>
+                <option value="Français">Français</option>
+                <option value="Informatique">Informatique</option>
+                <option value="Science">Science</option>
+                <option value="Mathematique">Mathematique</option>
+                <option value="Physique">Physique</option>
+                <option value="Histoire">Histoire</option>
+                <option value="Géographii">Géographii</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="telephone">Téléphone</label>
+            <input th:field="*{telephone}" type="text" id="telephone" name="telephone">
+        </div>
+
+        <div class="form-group">
+            <label for="ville">Ville</label>
+            <input th:field="*{ville}" type="text" id="ville" name="ville">
+        </div>
+
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input th:field="*{email}" type="email" id="email" name="email">
+        </div>
+
+        <div class="form-actions">
+            <button class="btn-cancel" onclick="confirmCancel()"><a class="btn-cancel" th:href="@{/Teachers}">Annuler</a></button>
+            <button class="btn-save" type="submit">Enregistrer</button>
+        </div>
+    </form>
+</div>
+</body>
+</html>
