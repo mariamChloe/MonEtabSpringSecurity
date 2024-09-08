@@ -26,6 +26,8 @@ public class User {
 
     @Column(name = "creationdate",nullable = false)
     private Instant creationdate;
+    @Column(name= "status",nullable=true)
+    private String status;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy ="user")
     private Set<RoleUser> roleUsers;

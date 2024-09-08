@@ -7,10 +7,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -68,6 +65,16 @@ public class TeacherControlleur {
         log.debug("Request to delete teacher with id: {}", id);
         teacherService.delecte(id);
         return "redirect:/Teachers";
+    }
+    @GetMapping("/search")
+    public String searchTeachers(@RequestParam String query  , @RequestParam String gender, Model model)
+    {
+        List<TeacherDTO> teachers = teacherService.findByNomOrMatiereAndGenre(query  , gender);
+        model.addAttribute("teachers", teachers);
+        model.addAttribute("query", query);
+        model.addAttribute("gender", gender);
+
+        return "Teacher/list";
     }
 
 }

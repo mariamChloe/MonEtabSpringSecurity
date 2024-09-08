@@ -12,10 +12,20 @@
 </div>
 
     <div class="content1">
-        <div class="back-button">
+        <form class="back-button" role="search" method="get" th:action="@{/Students/search}">
             <h1 style="color:black;">Elèves(<span th:text="${students.size()}"></span>)</h1>
-            <a th:href="@{/Students/show_add_Student_form}"><i class="fas fa-arrow-left"></i>Nouveau élève</a>
-        </div>
+            <div class="search">
+                <input th:value="${query}" name="query" type="search" placeholder="RECHERCHE : (NOM , GENRE , MATRICULE)">
+                <select  class="buttonsearch" name="gender"  th:value="${gender}">
+                    <option disabled selected>Choix Sexe</option>
+                    <option value="Homme" th:if="${gender == 'Homme'} ? 'selected':''">Homme</option>
+                    <option value="Femme" th:if="${gender == 'Femme'} ? 'selected':''">Femme</option>
+                    <option value="Autre" th:if="${gender == 'Autre'} ? 'selected':''">Autre</option>
+                </select>
+                <button type="submit" class="buttonsearch">Rechercher</button>
+            </div>
+            <a th:href="@{/Students/show_add_Student_form}"><i class="fas fa-plus"></i>Nouveau élève</a>
+        </form>
         <table>
             <thead>
                 <tr>

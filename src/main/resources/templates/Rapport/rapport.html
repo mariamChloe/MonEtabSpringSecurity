@@ -3,16 +3,14 @@
       xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 <head th:insert="Fragments/fragment::head">
-
 </head>
 <body>
 
-<div class="sidebar"  th:insert="Fragments/fragment::sidebar">
-
+<div class="sidebar" th:insert="Fragments/fragment::sidebar">
 </div>
 
 <div class="content">
-    <div class="back-button" style="justify-content: flex-end;" >
+    <div class="back-button" style="justify-content: flex-end;">
         <a th:href="@{/Students}"><i class="fas fa-arrow-left"></i> Retour</a>
     </div>
 
@@ -23,17 +21,39 @@
             <label for="classe">Sélectionner une option</label>
             <select id="classe" name="classe">
                 <option value="6eme" disabled selected>Selectionnez une option</option>
-                <option value="6eme">Listes des élèves </option>
-                <option value="5eme">Listes des professeurs</option>
-                <option value="4eme">Listes des Utilisateurs</option>
+                <option value="students">Listes des élèves</option>
+                <option value="teachers">Listes des professeurs</option>
+                <option value="users">Listes des Utilisateurs</option>
             </select>
         </div>
 
         <div class="form-actions">
-            <button class="btn-cancel" onclick="confirmCancel()">Générer en format pdf</button>
-            <button class="btn-save">Générer en format Excel</button>
+            <button class="btn-cancel" onclick="confirmCancel()">Générer en format PDF</button>
+            <button class="btn-save" onclick="generateReport('excel')">Générer en format Excel</button>
         </div>
     </div>
 </div>
+
+<script>
+    function generateReport(format) {
+        const selectElement = document.getElementById('classe');
+        const selectedOption = selectElement.options[selectElement.selectedIndex].value;
+
+        if (selectedOption === '6eme') {
+            alert('Please select a valid option.');
+            return;
+        }
+
+        const url = format === 'pdf' ? `/Rapport/generatePdf?type=${selectedOption}` : `/Rapport/generateExcel?type=${selectedOption}`;
+
+        // Trigger a file download
+        window.location.href = url;
+    }
+
+    function confirmCancel() {
+        generateReport('pdf');
+    }
+</script>
+
 </body>
 </html>

@@ -2,6 +2,7 @@ package ci.digitalacademy.monetab.services;
 
 import ci.digitalacademy.monetab.services.dto.UserDTO;
 
+import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,5 +17,13 @@ public interface UserService {
     List<UserDTO> findAll();
 
     void delecte(Long id);
+
+    List<UserDTO> initUser(List<UserDTO> users);
+
+    List<UserDTO> findByCreationdateLessThanAndRoleUsers(Instant creationdate, String role);
+
+    Optional<UserDTO> findBySpeudo(String speudo);
+    void updateUserStatus(Long id, String status);
+
 
 }

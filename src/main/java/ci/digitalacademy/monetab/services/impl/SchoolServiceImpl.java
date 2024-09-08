@@ -69,6 +69,12 @@ public class SchoolServiceImpl implements SchoolService {
     }
 
     @Override
+    public boolean isConfigured() {
+        // Check if the school settings are configured
+        return schoolRepository.count() > 0;
+    }
+
+    @Override
     public void delete(Long id) {
         log.debug("Request to delete school with id {}", id);
         schoolRepository.deleteById(id);

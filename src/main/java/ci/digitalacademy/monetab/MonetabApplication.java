@@ -1,14 +1,19 @@
 package ci.digitalacademy.monetab;
 
 import ci.digitalacademy.monetab.services.*;
+import ci.digitalacademy.monetab.services.dto.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import java.time.Instant;
+
 @SpringBootApplication
 public class MonetabApplication implements CommandLineRunner {
+	@Autowired
+	private CustomProperties props;
 
 	@Autowired
 	private UserService userService;
@@ -33,10 +38,13 @@ public class MonetabApplication implements CommandLineRunner {
 	public static void main(String[] args) {
 		SpringApplication.run(MonetabApplication.class, args);
 	}
-
+	/*@Override
+	public void run(String... args) throws Exception{
+		System.out.println(props.getApiUrl());
+	}*/
 	@Override
 	public void run(String... args) throws Exception {
-		/*String Password = bCryptPasswordEncoder.encode("admin");
+		String Password = bCryptPasswordEncoder.encode("admin");
 
 		UserDTO user = new UserDTO();
 		user.setPseudo("admin");
@@ -52,7 +60,7 @@ public class MonetabApplication implements CommandLineRunner {
 		user.setPassword(Password2);
 		user.setCreationdate(Instant.now());
 		userService.save(user);
-		*/
+
 
 
 
@@ -63,4 +71,6 @@ public class MonetabApplication implements CommandLineRunner {
 
 
 	}
+
+
 }

@@ -1,6 +1,5 @@
 package ci.digitalacademy.monetab.services;
 
-import ci.digitalacademy.monetab.models.Teacher;
 import ci.digitalacademy.monetab.services.dto.TeacherDTO;
 
 import java.util.List;
@@ -17,4 +16,10 @@ public interface TeacherService {
     List<TeacherDTO> findAll();
 
     void delecte(Long id);
+
+    void delete(Long id);
+    List<TeacherDTO> findByNomOrMatiereAndGenre(String query , String genre);
+
+
+
 }

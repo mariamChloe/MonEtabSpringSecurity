@@ -57,4 +57,11 @@ public class StudentServiceImpl implements StudentService {
 
         studentRepository.deleteById(id);
     }
+
+
+    @Override
+    public List<StudentDTO> findByNomOrGenreOrMatricule(String query, String genre) {
+        List<Student> students = studentRepository.findByNomIgnoreCaseOrMatriculeIgnoreCaseAndGenre(query  , query ,genre);
+        return students.stream().map(student -> studentMapper.toDto(student)).toList();
+    }
 }

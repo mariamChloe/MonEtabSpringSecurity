@@ -49,4 +49,18 @@ public class AppSettingServiceImpl implements AppSettingService {
     public List<AppSettingDTO> findAllBySmtpUserName(String smtpuserneme) {
         return List.of();
     }
+
+    @Override
+    public String getLogoUrl() {
+        return null;
+    }
+
+    @Override
+    public boolean isConfigured() {
+        // Check if the app settings are configured
+        return appSettingRepository.count() > 0;
+    }
 }
+
+
+

@@ -18,4 +18,8 @@ public interface AppSettingService {
     void delecte(Long id);
 
     List<AppSettingDTO> findAllBySmtpUserName(String smtpuserneme );
+
+    String getLogoUrl();
+
+    boolean isConfigured();
 }

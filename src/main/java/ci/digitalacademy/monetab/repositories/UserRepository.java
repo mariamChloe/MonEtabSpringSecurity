@@ -8,8 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface UserRepository extends JpaRepository<User, Long> {
-    Optional<User> findByPseudo(String pseudo);
+    List<User> findByCreationdateLessThanAndRoleUsers_Role(Instant creationdate, String role);
 
-    // Updated method name to correctly reference the 'role' field inside the 'RoleUser' entity
-    List<User> findByCreationdateLessThanAndRoleUsers_Role(Instant creationDate, String role);
+    Optional<User> findByPseudo(String pseudo);
 }

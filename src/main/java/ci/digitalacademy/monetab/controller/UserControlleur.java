@@ -10,6 +10,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneOffset;
 import java.util.List;
 import java.util.Optional;
 
@@ -74,6 +76,22 @@ public class UserControlleur {
     public String showDeleteTeacher(@PathVariable Long id) {
         log.debug("Request to delete user with id: {}", id);
         userService.delecte(id);
+        return "redirect:/Users";
+    }
+
+    @GetMapping("/search")
+    public String searchTeachers(@RequestParam LocalDate date, @RequestParam String role, Model model) {
+        List<UserDTO> users = userService.findByCreationdateLessThanAndRoleUsers(Instant.from(date.atStartOfDay(ZoneOffset.systemDefault())), role);
+        model.addAttribute("users", users);
+        model.addAttribute("date", date);
+        model.addAttribute("role", role);
+
+        return "User/list";
+    }
+
+    @PostMapping("/updateStatus/{id}")
+    public String updateUserStatus(@PathVariable Long id, @RequestParam String status) {
+        userService.updateUserStatus(id, status);
         return "redirect:/Users";
     }
 }

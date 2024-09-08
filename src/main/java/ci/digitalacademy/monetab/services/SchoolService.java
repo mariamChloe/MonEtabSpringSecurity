@@ -15,6 +15,8 @@ public interface SchoolService {
     Optional<SchoolDTO> findOne(Long id);
 
     List<SchoolDTO> findAll();
+    boolean isConfigured();
+
 
 
 

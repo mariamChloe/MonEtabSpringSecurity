@@ -16,4 +16,6 @@ public interface StudentService {
     List<StudentDTO> findAll();
 
     void delecte(Long id);
+
+    List<StudentDTO> findByNomOrGenreOrMatricule(String query, String genre);
 }

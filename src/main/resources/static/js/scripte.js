@@ -5,7 +5,7 @@ const pieChart = new Chart(ctx, {
         labels: ['Homme', 'Femme'],
         datasets: [{
             data: [50, 30], // Example data
-            backgroundColor: ['#000000', '#bbbaba']
+            backgroundColor: ['#54a4dc', '#32348d']
         }]
     },
     options: {

@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Slf4j
@@ -18,21 +19,19 @@ import java.util.Optional;
 public class TeacherServiceImpl implements TeacherService {
 
     private final TeacherRepository teacherRepository;
-
     private final TeacherMapper teacherMapper;
-
 
     @Override
     public TeacherDTO save(TeacherDTO teacherDTO) {
-        log.debug("Resquest to save : {}",teacherDTO);
+        log.debug("Request to save Teacher : {}", teacherDTO);
         Teacher teacher = teacherMapper.toEntity(teacherDTO);
-        teacher= teacherRepository.save(teacher);
-
-        return  teacherMapper.toDto(teacher);
+        teacher = teacherRepository.save(teacher);
+        return teacherMapper.toDto(teacher);
     }
 
     @Override
     public TeacherDTO update(TeacherDTO teacherDTO) {
+        log.debug("Request to update Teacher : {}", teacherDTO);
         Teacher teacher = teacherMapper.toEntity(teacherDTO);
         teacher = teacherRepository.save(teacher);
         return teacherMapper.toDto(teacher);
@@ -40,21 +39,34 @@ public class TeacherServiceImpl implements TeacherService {
 
     @Override
     public Optional<TeacherDTO> findOne(Long id) {
-        return teacherRepository.findById(id).map(teacher -> {
-            return teacherMapper.toDto(teacher);
-        });
+        log.debug("Request to get Teacher with ID : {}", id);
+        return teacherRepository.findById(id).map(teacherMapper::toDto);
     }
 
     @Override
     public List<TeacherDTO> findAll() {
-        return teacherRepository.findAll().stream().map(teacher -> {
-            return teacherMapper.toDto(teacher);
-        }).toList();
+        log.debug("Request to get all Teachers");
+        return teacherRepository.findAll().stream()
+                .map(teacherMapper::toDto)
+                .collect(Collectors.toList());
     }
 
     @Override
     public void delecte(Long id) {
 
+    }
+
+    @Override
+    public void delete(Long id) {
+        log.debug("Request to delete Teacher with ID : {}", id);
         teacherRepository.deleteById(id);
+    }
+
+
+
+    @Override
+    public List<TeacherDTO> findByNomOrMatiereAndGenre(String query, String genre) {
+        List<Teacher> teachers = teacherRepository.findByNomOrMatiereAndGenre(query , query , genre);
+        return teachers.stream().map(teacher -> teacherMapper.toDto(teacher)).toList();
     }
 }

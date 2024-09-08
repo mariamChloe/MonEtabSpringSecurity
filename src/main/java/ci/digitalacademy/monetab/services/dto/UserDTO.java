@@ -19,6 +19,6 @@ public class UserDTO {
     private Instant creationdate;
 
     private AddressDTO adresseDTO;
-
+    private String status;
 
 }
