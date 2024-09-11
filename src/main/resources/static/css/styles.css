@@ -3,9 +3,11 @@ body {
     margin: 0;
     padding: 0;
     font-family: Arial, sans-serif;
-    background-color: rgb(100,180,212); /* Conserve la couleur de fond #f4f4f4 */
+    background-color: #fff; /* Conserve la couleur de fond #f4f4f4 */
     display: flex;
 }
+
+
 
 /* Conteneur principal */
 .container {
@@ -14,24 +16,27 @@ body {
     align-items: center;
     width: 100%;
     height: 100%;
-    margin-top: 160px;
 }
 
 /* Styles pour la boîte de connexion */
 .login-box {
-    background-color: white;
+    background-color: #2596be; /* Couleur bleue avec transparence */
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
     text-align: center;
     width: 300px;
+    position: absolute; /* Position absolue pour pouvoir ajuster top */
+    top: 50%; /* Déplace la boîte de connexion à 50% de la hauteur de la fenêtre */
+    left: 50%; /* Déplace la boîte de connexion à 50% de la largeur de la fenêtre */
+    transform: translate(-50%, -50%); /* Centre la boîte de connexion */
 }
 
 .logo img {
     width: 50px;
     margin-bottom: 10px;
     position: absolute;
-    right : 740px;
+    right: 740px;
 }
 
 .logo h1 {
@@ -71,16 +76,14 @@ body {
 }
 
 .login-btn:hover {
-    background-color: #444;
+    background-color: #3255ff;
 }
 
 /* Sidebar styles */
 .sidebar {
     width: 200px;
-    background-color:rgb(100,180,212);
-    padding: 20px;
-    height: 100vh;
-    border-right: 4px solid #fff ;
+    background-color: #2596be; /* Couleur de fond de la sidebar */
+    height: 100%;
 }
 
 .sidebar h2 {
@@ -126,7 +129,7 @@ body {
     margin: 15px 0;
     font-size: 16px;
     display: flex;
-    align-items: center; 
+    align-items: center;
     margin-top: 210px;
 }
 
@@ -139,7 +142,6 @@ body {
 
 .sidebar hr {
     border: 0;
-    border-top: 1px solid #ccc;
     margin: 15px 0;
 }
 
@@ -176,8 +178,8 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: white;
-    border: 4px solid #fff;
+    background-color: #fff;
+    border: 4px solid #64b4d4;
 }
 
 /* Ajustement du canevas pour le diagramme circulaire */
@@ -283,7 +285,8 @@ button {
 .form-actions .btn-save:hover {
     background-color: #218838;
 }
-.back-button{
+
+.back-button {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -297,9 +300,11 @@ button {
     align-items: center;
     gap: 10px;
 }
+
 .edit-icon, .delete-icon {
     cursor: pointer;
 }
+
 .popup0 {
     display: none;
     position: fixed;
@@ -311,6 +316,7 @@ button {
     justify-content: center;
     align-items: center;
 }
+
 .confirmation-container {
     background: white;
     padding: 20px;
@@ -318,9 +324,11 @@ button {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     text-align: center;
 }
+
 .confirmation-container h2 {
     margin-bottom: 20px;
 }
+
 .confirmation-container button {
     padding: 10px 20px;
     border: none;
@@ -328,16 +336,16 @@ button {
     cursor: pointer;
     margin: 5px;
 }
+
 .btn-confirm {
     background-color: red;
     color: white;
 }
+
 .btn-cancel {
     background-color: grey;
     color: white;
 }
-
-
 
 h1 {
     text-align: center;
@@ -354,11 +362,30 @@ h1 {
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
 
-
 form {
     display: flex;
     flex-direction: column;
 }
+
+.btn-back {
+    display: flex;
+    background-color: #2596be; /* Couleur du bouton */
+    color: white; /* Couleur du texte et icône */
+    padding: 10px 20px; /* Espace à l'intérieur du bouton */
+    border-radius: 5px; /* Bordures arrondies */
+    text-decoration: none; /* Enlève le soulignement du lien */
+    font-size: 16px; /* Taille du texte */
+    transition: background-color 0.3s ease; /* Animation pour l'effet de survol */
+}
+
+.btn-back i {
+    margin-right: 8px; /* Espace entre l'icône et le texte */
+}
+
+.btn-back:hover {
+    background-color: #197d9c; /* Couleur lors du survol */
+}
+
 
 div {
     margin-bottom: 15px;

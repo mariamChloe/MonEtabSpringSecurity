@@ -6,27 +6,28 @@
     <head th:insert="Fragments/fragment::head"></head>
 </head>
 <body>
+<div class="sidebar" th:insert="Fragments/fragment::sidebar">
+
+
+</div>
 <div class="form-container">
-<h1>Register School</h1>
+    <h1>Register School</h1>
 
-<!-- Form starts here -->
-<form th:action="@{/school/save}" th:object="${schoolDTO}" method="post">
-    <div>
-        <label for="name">School Name:</label>
-        <input type="text" id="name" th:field="*{name}" placeholder="Enter school name" required/>
-    </div>
-    <div>
-        <label for="url_logo">Logo URL:</label>
-        <input type="text" id="url_logo" th:field="*{url_logo}" />
-    </div>
+    <!-- Form starts here -->
+    <form th:action="@{/school/save}" th:object="${schoolDTO}" method="post" enctype="multipart/form-data">
+        <div>
+            <label for="name">School Name:</label>
+            <input type="text" id="name" th:field="*{name}" placeholder="Enter school name" required/>
+        </div>
+        <div>
+            <label for="logo">Logo:</label>
+            <input type="file" id="logo" name="logo" accept="image/*" required/>
+        </div>
 
-
-
-
-    <div class="form-actions">
-        <input type="submit" class="btn-save" value="Register"/>
-    </div>
-</form>
+        <div class="form-actions">
+            <input type="submit" class="btn-save" value="Register"/>
+        </div>
+    </form>
 </div>
 </body>
 </html>

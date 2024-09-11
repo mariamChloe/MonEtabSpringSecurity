@@ -9,15 +9,12 @@
     <!-- Update the path to the static CSS file -->
 </head>
 <body>
-<div class="sidebar" th:insert="Fragments/fragment::sidebar">
-    <img th:src="${logoUrl}" alt="Logo" style="max-width: 100%; height: auto;">
-
-
-</div>
 <div class="container">
     <div class="form-container">
-        <h1>App Setting Form</h1>
-        <form th:action="@{/appSetting/save}" th:object="${appSettingDTO}" method="post">
+        <h1>Update App Setting</h1>
+        <input  th:field="*{id}" hiden type="text">
+            <!-- Champ caché pour spécifier la méthode PUT -->
+            <input type="hidden" name="_method" value="put" />
             <div class="form-group">
                 <label for="smtpServer">SMTP Server:</label>
                 <input type="text" id="smtpServer" th:field="*{smtpServer}" /><br/>
@@ -35,9 +32,11 @@
                 <input type="number" id="smtpPort" th:field="*{smtpPort}" /><br/>
             </div>
             <div class="form-actions">
-                <input type="submit" class="btn-save login-btn" value="Submit"/>
+                <button class="btn-cancel" onclick="confirmCancel()" >Annuler </button>
+                <button class="btn-save" type="submit" >Enregistrer </button>
+
             </div>
-        </form>
+        </input>
     </div>
 </div>
 </body>

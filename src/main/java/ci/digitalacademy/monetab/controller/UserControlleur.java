@@ -37,7 +37,7 @@ public class UserControlleur {
 
         log.debug("Request to show add user forms");
         model.addAttribute("users", new User());
-        return "/Users/form";
+        return "/User/form";
     }
 
     @PostMapping
@@ -90,8 +90,8 @@ public class UserControlleur {
     }
 
     @PostMapping("/updateStatus/{id}")
-    public String updateUserStatus(@PathVariable Long id, @RequestParam String status) {
+    public String updateStatut(@PathVariable Long id, @RequestParam String status) {
         userService.updateUserStatus(id, status);
-        return "redirect:/Users";
+        return "redirect:/Users"; // Redirige vers la page des utilisateurs après la mise à jour
     }
 }

@@ -7,6 +7,8 @@ import java.util.Optional;
 
 public interface AppSettingService {
 
+
+
     AppSettingDTO save(AppSettingDTO appSettingDTO);
 
     AppSettingDTO update(AppSettingDTO appSettingDTO);
@@ -17,9 +19,15 @@ public interface AppSettingService {
 
     void delecte(Long id);
 
+    void delete(Long id);
+
     List<AppSettingDTO> findAllBySmtpUserName(String smtpuserneme );
 
     String getLogoUrl();
 
     boolean isConfigured();
+
+    void saveSettings(AppSettingDTO appSettingDTO);
+    AppSettingDTO getCurrentSettings();
+
 }

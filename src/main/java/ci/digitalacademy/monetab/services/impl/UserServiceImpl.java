@@ -107,11 +107,12 @@ public class UserServiceImpl implements UserService {
         Optional<User> userOptional = userRepository.findById(id);
         if (userOptional.isPresent()) {
             User user = userOptional.get();
-            user.setStatus(status);
+            user.setStatus(Boolean.parseBoolean(status));
             userRepository.save(user);
         }
 
     }
+
 
 
 }

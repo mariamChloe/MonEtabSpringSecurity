@@ -5,6 +5,8 @@
     <title>Tableau de bord</title>
     <link rel="stylesheet" href="/css/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+
 </head>
 
 <div class="sidebar" th:fragment="sidebar">
@@ -37,15 +39,15 @@
     </ul>
     <hr style="margin-top:270px;">
     <ul>
-        <formn th:action="@{/logout}" method="post">
-        <li>
-            <a th:href="@{/logout}">
-                <i class="fas fa-sign-out-alt"></i> Déconnexion
-            </a>
-
-        </li>
-        </formn>
+        <form th:action="@{/logout}" method="post">
+            <li>
+                <button type="submit">
+                    <i class="fas fa-sign-out-alt"></i> Déconnexion
+                </button>
+            </li>
+        </form>
     </ul>
+
 </div>
 
 <!-- fragments/script.html -->

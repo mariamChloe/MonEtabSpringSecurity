@@ -9,7 +9,7 @@ import java.util.Optional;
 public interface StudentService {
     StudentDTO save(StudentDTO studentDTO);
 
-    StudentDTO update(StudentDTO studentDTO);
+    StudentDTO update(StudentDTO studentDTO, Long id);
 
     Optional<StudentDTO> findOne(Long id);
 
@@ -18,4 +18,8 @@ public interface StudentService {
     void delecte(Long id);
 
     List<StudentDTO> findByNomOrGenreOrMatricule(String query, String genre);
+
+    boolean existsById(Long id);
+
+    void delete(Long id);
 }

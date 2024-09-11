@@ -7,7 +7,7 @@
 <div class="sidebar" th:insert="Fragments/fragment::sidebar"></div>
 
 <div class="content">
-    <div class="back-button" style="justify-content: flex-end;">
+    <div class="btn-back" style="justify-content: flex-end;">
         <a th:href="@{/Teachers}"><i class="fas fa-arrow-left"></i> Retour</a>
     </div>
     <form class="form-container" th:object="${teachers}" th:action="@{/Teachers}" method="post">

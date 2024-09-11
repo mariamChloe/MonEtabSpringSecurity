@@ -32,7 +32,7 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public StudentDTO update(StudentDTO studentDTO) {
+    public StudentDTO update(StudentDTO studentDTO, Long id) {
         Student student = studentMapper.toEntity(studentDTO);
         student = studentRepository.save(student);
         return studentMapper.toDto(student);
@@ -63,5 +63,15 @@ public class StudentServiceImpl implements StudentService {
     public List<StudentDTO> findByNomOrGenreOrMatricule(String query, String genre) {
         List<Student> students = studentRepository.findByNomIgnoreCaseOrMatriculeIgnoreCaseAndGenre(query  , query ,genre);
         return students.stream().map(student -> studentMapper.toDto(student)).toList();
+    }
+
+    @Override
+    public boolean existsById(Long id) {
+        return false;
+    }
+
+    @Override
+    public void delete(Long id) {
+
     }
 }

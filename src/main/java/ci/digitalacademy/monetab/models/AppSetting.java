@@ -35,4 +35,5 @@ public class AppSetting implements Serializable {
     private School school;
 
 
+
 }

@@ -22,7 +22,7 @@ public class School implements Serializable {
     @Column(name = "name",nullable = false)
     private String name;
 
-    @Column(name = "url_logo",nullable = false)
+    @Column(name = "url_logo",nullable = true)
     private String url_logo;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy ="school")

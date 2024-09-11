@@ -16,9 +16,16 @@ public class AuthController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication != null && authentication.isAuthenticated() && !authentication.getName().equals("anonymousUser")) {
             // Redirigez l'utilisateur vers une autre page (par exemple, le tableau de bord)
-            return "redirect:/dashboard"; // Remplacez "/dashboard" par l'URL appropriée
+            return "redirect:/Home"; // Remplacez "/dashboard" par l'URL appropriée
         }
         // Sinon, affichez la page de connexion
         return "Auth/index";
+    }
+
+    @GetMapping("/logout")
+    public String logout() {
+        // Invalider la session et rediriger vers la page de connexion après déconnexion
+        SecurityContextHolder.clearContext(); // Effacez le contexte de sécurité actuel (déconnexion effective)
+        return "redirect:/Auth"; // Redirigez vers la page de connexion
     }
 }
