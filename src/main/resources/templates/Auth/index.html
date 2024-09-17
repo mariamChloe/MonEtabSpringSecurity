@@ -4,10 +4,12 @@
       xmlns:th="http://www.thymeleaf.org">
 
 <head th:insert="Fragments/fragment::head">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
 
 </head>
 
-<body style="background-color: #EEF1FF;">
+<body style="background-color: #fff;">
     <div class="container">
         <div class="login-box">
             <div class="logo">
@@ -16,11 +18,17 @@
             <form method="POST" th:action="@{/Auth}">
                 <div class="input-group">
                     <label for="username">Identifiant</label>
-                    <input type="text" id="username" name="username" required>
+                    <div class="input-icon">
+                        <i class="fas fa-user"></i>
+                        <input type="text" id="username" name="username" required>
+                    </div>
                 </div>
                 <div class="input-group">
                     <label for="password">Mot de passe</label>
-                    <input type="password" id="password" name="password" required>
+                    <div class="input-icon">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="password" name="password" required>
+                    </div>
                 </div>
                 <button type="submit" class="login-btn">Connexion</button>
             </form>

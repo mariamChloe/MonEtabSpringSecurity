@@ -20,7 +20,7 @@ body {
 
 /* Styles pour la boîte de connexion */
 .login-box {
-    background-color: #2596be; /* Couleur bleue avec transparence */
+    background-color: #fff; /* Couleur bleue avec transparence */
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
@@ -65,7 +65,7 @@ body {
 }
 
 .login-btn {
-    background-color: #333;
+    background-color: #48b4f9;
     color: white;
     padding: 10px;
     border: none;
@@ -81,7 +81,7 @@ body {
 
 /* Sidebar styles */
 .sidebar {
-    width: 200px;
+    width: 250px;
     background-color: #2596be; /* Couleur de fond de la sidebar */
     height: 100%;
 }
@@ -424,4 +424,20 @@ input[type="text"] {
 
 .btn-save:hover {
     background-color: #45a049;
+}
+
+.input-icon {
+    position: relative;
+}
+
+.input-icon i {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+    color: #bleue;
+}
+
+.input-icon input {
+    padding-left: 30px; /* Adjust based on icon size */
 }

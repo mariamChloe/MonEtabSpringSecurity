@@ -1,7 +1,7 @@
 package ci.digitalacademy.monetab.services.impl;
 
 import ci.digitalacademy.monetab.repositories.AdresseRepository;
-import ci.digitalacademy.monetab.services.AdresseService;
+import ci.digitalacademy.monetab.services.AddresseService;
 import ci.digitalacademy.monetab.services.dto.AddressDTO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -14,7 +14,7 @@ import java.util.Optional;
 @Slf4j
 @Service
 
-public class AdresseServiceImpl implements AdresseService {
+public class AdresseServiceImpl implements AddresseService {
 
     private final AdresseRepository adresseRepository;
 

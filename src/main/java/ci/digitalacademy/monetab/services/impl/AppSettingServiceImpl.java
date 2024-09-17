@@ -17,7 +17,6 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 @Slf4j
 @Service
-@Transactional
 public class AppSettingServiceImpl implements AppSettingService {
 
     private final AppSettingRepository appSettingRepository;
@@ -37,9 +36,22 @@ public class AppSettingServiceImpl implements AppSettingService {
         if (appSettingDTO.getId() == null || !appSettingRepository.existsById(appSettingDTO.getId())) {
             throw new IllegalArgumentException("AppSetting ID does not exist");
         }
-        AppSetting appSetting = appSettingMapper.toEntity(appSettingDTO);
-        appSetting = appSettingRepository.save(appSetting);
-        return appSettingMapper.toDto(appSetting);
+
+        // Fetch the existing AppSetting entity from the repository
+        AppSetting existingAppSetting = appSettingRepository.findById(appSettingDTO.getId())
+                .orElseThrow(() -> new IllegalArgumentException("AppSetting ID does not exist"));
+
+        // Update the fields of the existing AppSetting entity
+        existingAppSetting.setSmtpServer(appSettingDTO.getSmtpServer());
+        existingAppSetting.setSmtpUserName(appSettingDTO.getSmtpUserName());
+        existingAppSetting.setSmtpPassword(appSettingDTO.getSmtpPassword());
+        existingAppSetting.setSmtpPort(appSettingDTO.getSmtpPort());
+
+        // Save the updated AppSetting entity
+        AppSetting updatedAppSetting = appSettingRepository.save(existingAppSetting);
+
+        // Convert the updated AppSetting entity back to DTO and return
+        return appSettingMapper.toDto(updatedAppSetting);
     }
 
     @Override
@@ -89,10 +101,14 @@ public class AppSettingServiceImpl implements AppSettingService {
     }
 
     @Override
-    public void saveSettings(AppSettingDTO appSettingDTO) {
+    public AppSetting saveSettings(AppSettingDTO appSettingDTO) {
         log.debug("Request to save settings : {}", appSettingDTO);
+
+        // Correct mapping: Map DTO to entity
         AppSetting appSetting = appSettingMapper.toEntity(appSettingDTO);
-        appSettingRepository.save(appSetting);
+
+        // Save the entity to the repository
+        return appSettingRepository.save(appSetting);
     }
 
     @Override

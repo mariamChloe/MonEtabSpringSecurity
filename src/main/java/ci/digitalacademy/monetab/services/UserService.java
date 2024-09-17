@@ -12,6 +12,8 @@ public interface UserService {
 
     UserDTO update(UserDTO userDTO);
 
+    UserDTO update(Long id, UserDTO userDTO);
+
     Optional<UserDTO> findOne(Long id);
 
     List<UserDTO> findAll();
@@ -24,6 +26,14 @@ public interface UserService {
 
     Optional<UserDTO> findBySpeudo(String speudo);
     void updateUserStatus(Long id, String status);
+
+    UserDTO findBySlug(String slug);
+    UserDTO partialUpdate(Long id, UserDTO userDTO);
+
+    void delete(Long id);
+    UserDTO findById(Long id);
+
+
 
 
 }

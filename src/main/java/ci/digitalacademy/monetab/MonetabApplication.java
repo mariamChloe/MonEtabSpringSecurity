@@ -12,8 +12,6 @@ import java.time.Instant;
 
 @SpringBootApplication
 public class MonetabApplication implements CommandLineRunner {
-	@Autowired
-	private CustomProperties props;
 
 	@Autowired
 	private UserService userService;
@@ -22,7 +20,7 @@ public class MonetabApplication implements CommandLineRunner {
 	private StudentService studentService;
 
 	@Autowired
-	private AdresseService adresseService;
+	private AddresseService adresseService;
 
 	@Autowired
 	private TeacherService teacherService;
@@ -60,15 +58,6 @@ public class MonetabApplication implements CommandLineRunner {
 		user.setPassword(Password2);
 		user.setCreationdate(Instant.now());
 		userService.save(user);
-
-
-
-
-
-
-
-
-
 
 	}
 

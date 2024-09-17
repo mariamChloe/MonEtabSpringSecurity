@@ -21,9 +21,11 @@ public class Absence implements Serializable {
 
     @Column(name = "absence_date")
     private Date absence_date;
+    @Column(name="slug", unique=true )
+    private boolean slug;
 
     @Column(name = "absence_number")
-    private int absence_number;
+    private Integer absence_number;
 
     @ManyToOne(fetch = FetchType.EAGER,  cascade = CascadeType.ALL)
     @JoinColumn(name ="student_id")

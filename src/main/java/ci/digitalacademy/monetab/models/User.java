@@ -18,15 +18,17 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "pseudo",unique = true,nullable = false)
+    @Column(name = "pseudo",unique = false,nullable = false)
     private String pseudo;
+    @Column(name="slug", unique=true )
+    private String slug;
 
     @Column(name ="password",nullable = false)
     private String password;
 
     @Column(name = "creationdate",nullable = false)
     private Instant creationdate;
-    @Column(name= "status",nullable=true)
+    @Column(name= "status",nullable=false)
     private boolean status;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy ="user")

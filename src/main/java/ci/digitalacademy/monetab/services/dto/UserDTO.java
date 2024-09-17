@@ -20,5 +20,6 @@ public class UserDTO {
 
     private AddressDTO adresseDTO;
     private String status;
+    private String slug;
 
 }

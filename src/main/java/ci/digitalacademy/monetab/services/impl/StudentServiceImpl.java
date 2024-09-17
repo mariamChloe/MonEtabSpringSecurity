@@ -1,16 +1,25 @@
 package ci.digitalacademy.monetab.services.impl;
 
+import ci.digitalacademy.monetab.Security.AuthorityPersonn;
 import ci.digitalacademy.monetab.models.Student;
 import ci.digitalacademy.monetab.repositories.StudentRepository;
+import ci.digitalacademy.monetab.services.AddresseService;
+import ci.digitalacademy.monetab.services.RoleUserService;
 import ci.digitalacademy.monetab.services.StudentService;
-import ci.digitalacademy.monetab.services.dto.StudentDTO;
+import ci.digitalacademy.monetab.services.UserService;
+import ci.digitalacademy.monetab.services.dto.*;
 import ci.digitalacademy.monetab.services.mapper.StudentMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.modelmapper.ModelMapper;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
+import java.util.UUID;
 
 
 @RequiredArgsConstructor
@@ -20,6 +29,12 @@ public class StudentServiceImpl implements StudentService {
 
     private final StudentRepository studentRepository;
     private  final StudentMapper studentMapper;
+    private final UserService userService;
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
+    private final RoleUserService roleUserService;
+    private final AddresseService addresseService;
+    private final ModelMapper modelMapper;
+
 
 
     @Override
@@ -74,4 +89,25 @@ public class StudentServiceImpl implements StudentService {
     public void delete(Long id) {
 
     }
+@Override
+@Transactional
+    public RegistrationStudentDTO registerStudent(RegistrationStudentDTO registrationStudentDTO) {
+    log.debug("Request to register student {}", registrationStudentDTO);
+    AddressDTO address = modelMapper.map(registrationStudentDTO, AddressDTO.class);
+    address = addresseService.save(address);
+
+    Set<Object> roleUsers = roleUserService.findByNameRole(AuthorityPersonn.ROLE_USER);
+    UserDTO user = modelMapper.map(registrationStudentDTO, UserDTO.class);
+    String password = UUID.randomUUID().toString();
+    user.setPassword(bCryptPasswordEncoder.encode(password));
+    user = userService.save(user);
+
+    StudentDTO student = modelMapper.map(registrationStudentDTO, StudentDTO.class);
+    student.setUser(user);
+    student.set(address);
+    student = save(student);
+
+
+    return registrationStudentDTO;
+}
 }

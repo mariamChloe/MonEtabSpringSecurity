@@ -27,40 +27,21 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDTO save(UserDTO userDTO) {
-        log.debug("Resquest to save : {}",userDTO);
         User user = userMapper.toEntity(userDTO);
-        user= userRepository.save(user);
-
-        return  userMapper.toDto(user);
+        user = userRepository.save(user);
+        return userMapper.toDto(user);
     }
 
     @Override
     public UserDTO update(UserDTO userDTO) {
+        return null;
+    }
 
-        log.debug("Request to update {}",userDTO);
-
-       // return userRepository.findById(user.getId())
-//        //        .map(existingUser->{
-//           //         existingUser.setPassword(user.getPassword());
-//              //      return existingUser;
-//             //   }).map(existingUser->{
-//               //     return save(existingUser);
-//             //   }).orElseThrow(()->new IllegalArgumentException());
-//
-//        Optional<User>optionalUser=findOne(user.getId());//recupertion d'un Optional<User>
-//        if(optionalUser.isPresent()){ //verification de l'existance d'un contenu dans le optimal
-//            User userToUpdate = optionalUser.get(); //declaration + affection d'u user à partir du optimal
-//            userToUpdate.setPassword(user.getPassword()); //mise à jour du pseud
-//            userToUpdate.setSpeudo(user.getSpeudo());//mise à jour du pseud
-//
-//            log.info("Request to update user in progress");
-//
-//            return save(userToUpdate); //enregistrement de l'utilisateur
-//        }else {
-//            throw new IllegalArgumentException();
-//        }
-
-        User user = userMapper.toEntity(userDTO);
+    @Override
+    public UserDTO update(Long id, UserDTO userDTO) {
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+        userMapper.toEntity(userDTO);
         user = userRepository.save(user);
         return userMapper.toDto(user);
     }
@@ -113,6 +94,33 @@ public class UserServiceImpl implements UserService {
 
     }
 
+    @Override
+    public UserDTO findBySlug(String slug) {
+        return userRepository.findBySlug(slug)
+                .map(userMapper::toDto)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+    }
+
+    @Override
+    public UserDTO partialUpdate(Long id, UserDTO userDTO) {
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+        userMapper.toEntity(userDTO);
+        user = userRepository.save(user);
+        return userMapper.toDto(user);
+    }
+
+
+
+    @Override
+    public void delete(Long id) {
+
+    }
+
+    @Override
+    public UserDTO findById(Long id) {
+        return null;
+    }
 
 
 }

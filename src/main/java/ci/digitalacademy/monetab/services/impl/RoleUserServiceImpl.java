@@ -12,6 +12,8 @@ import org.springframework.stereotype.Service;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -66,7 +68,20 @@ public class RoleUserServiceImpl implements RoleUserService {
     }
 
     @Override
+    public Set<Object> findByNameRole(String userRole) {
+        return roleUserRepository.findByRole(userRole).stream().map(roleUser -> {
+            return roleUserMapper.toEntity(roleUser);
+        }).collect(Collectors.toSet());
+    }
+
+    @Override
     public Optional<RoleUserDTO> findOne(Long id) {
         return roleUserRepository.findById(id).map(roleUserMapper::toDto);
+    }
+    @Override
+    public List<RoleUser> findByRole(String roleUser) {
+        return roleUserRepository.findByRole(roleUser).stream().map(role -> {
+            return roleUserMapper.toEntity(role);
+        }).toList();
     }
 }

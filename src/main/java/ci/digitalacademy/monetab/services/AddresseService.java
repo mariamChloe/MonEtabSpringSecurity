@@ -5,7 +5,7 @@ import ci.digitalacademy.monetab.services.dto.AddressDTO;
 import java.util.List;
 import java.util.Optional;
 
-public interface AdresseService {
+public interface AddresseService {
 
     AddressDTO save(AddressDTO addressDTO);
 

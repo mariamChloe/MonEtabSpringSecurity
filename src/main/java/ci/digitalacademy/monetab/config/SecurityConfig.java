@@ -5,6 +5,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.oauth2.server.resource.OAuth2ResourceServerConfigurer;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
@@ -23,20 +25,13 @@ public class SecurityConfig {
                         .requestMatchers("/css/**").permitAll()  // Permettre l'accès aux ressources css
                         .requestMatchers("/icon/**").permitAll()  // Permettre l'accès aux ressources icon
                         .requestMatchers("/js/**").permitAll()  // Permettre l'accès aux ressources js
+                        .requestMatchers("/api/**").permitAll()  // Autoriser l'accès à /api/abscences
                         .requestMatchers("/appSetting/**").permitAll()  // Autoriser l'accès au point de terminaison /app-setting
                         .requestMatchers("/appSetting/school").permitAll()  // Autoriser l'accès au point de terminaison /school-setting
-                                .requestMatchers("/appSetting/update").permitAll()  // Autoriser l'accès au point de terminaison /school-setting
-                                .requestMatchers("/Users/**").permitAll()  // Autoriser l'accès au point de terminaison /school-setting
-                                .requestMatchers("/Users/**").authenticated() // Autoriser les requêtes vers /Users/**
-
-                                .requestMatchers("/api/students/**").permitAll()  // Autoriser l'accès au point de terminaison /student
-                        .requestMatchers("/api/Teachers/**").permitAll()  // Autoriser l'accès au point de terminaison /student
+                        .requestMatchers("/appSetting/update").permitAll()  // Autoriser l'accès au point de terminaison /school-setting
+                        .requestMatchers("/Users/**").permitAll()  // Autoriser l'accès au point de terminaison /school-setting
                         .requestMatchers("/swagger-ui-**").permitAll()
-                                .requestMatchers("/v3/api-docs-**").permitAll()  // Autoriser l'accès au point de terminaison /student
-// Autoriser l'accès au point de terminaison /student
-
-
-
+                        .requestMatchers("/v3/api-docs-**").permitAll()  // Autoriser l'accès au point de terminaison /student// Autoriser l'accès au point de terminaison /student
                         .requestMatchers("/images/**").permitAll()  // Permettre l'accès aux ressources images
                         .requestMatchers("/public/**").permitAll()  // Permettre l'accès aux ressources publiques (non authentifiées)
                         .anyRequest().authenticated()  // Toutes les autres demandes nécessitent une authentification
@@ -52,8 +47,10 @@ public class SecurityConfig {
                         .invalidateHttpSession(true)  // Invalider la session après déconnexion
                         .deleteCookies("JSESSIONID")  // Supprimer le cookie de session après déconnexion
                         .permitAll()  // Permettre à chacun de se déconnecter
-                );
-
+                )
+                .sessionManagement(session -> session
+                    .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED))
+                .oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt);
         return http.build();
     }
     @Bean

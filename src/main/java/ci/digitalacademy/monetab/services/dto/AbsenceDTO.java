@@ -1,6 +1,5 @@
 package ci.digitalacademy.monetab.services.dto;
 
-import ci.digitalacademy.monetab.models.Student;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -14,7 +13,10 @@ public class AbsenceDTO {
 
     private Date absence_date;
 
-    private int absence_number;
+    private Integer absence_number;
 
     private StudentDTO studentDTO;
+    private String  slug;
+
+
 }

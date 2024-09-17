@@ -1,6 +1,7 @@
 package ci.digitalacademy.monetab.WebRessource;
 
 import ci.digitalacademy.monetab.services.StudentService;
+import ci.digitalacademy.monetab.services.dto.RegistrationStudentDTO;
 import ci.digitalacademy.monetab.services.dto.StudentDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -24,13 +25,18 @@ public class StudentRessource {
 
     private final StudentService studentService;
 
-    @PostMapping
-    @ApiResponse(responseCode = "200", description = "Request to save student")
-    @Operation(summary = "save new student", description ="this endpoint allow to save")
-    public ResponseEntity<StudentDTO> saveStudent(@RequestBody StudentDTO studentDTO){
-        log.debug("REST Request to save  {}", studentDTO);
-        return new ResponseEntity<>(studentService.save(studentDTO), HttpStatus.CREATED);
+    /*@PostMapping
+    @ApiResponse(responseCode = "201", description = "Student created successfully")
+    @Operation(summary = "Save new student", description = "This endpoint allows saving a new student")
+    public ResponseEntity<StudentDTO> saveStudent(@RequestBody StudentDTO studentDTO) {
+        log.debug("REST Request to save student: {}", studentDTO);
+        StudentDTO savedStudent = studentService.save(studentDTO);
+        return new ResponseEntity<>(savedStudent, HttpStatus.CREATED);
     }
+
+     */
+
+
 
     @PutMapping("/{id}")
     @ApiResponse(responseCode = "200", description = "Request to get student")
@@ -68,7 +74,11 @@ public class StudentRessource {
     @DeleteMapping("/{id}")
     public void deleteStudent(@PathVariable Long id){
         log.debug("REST Request to delete  ");
-        studentService.delete(id);
     }
-
+    @PostMapping("/register-student")
+    @ResponseStatus(HttpStatus.CREATED)
+    public RegistrationStudentDTO registerStudent(@RequestBody RegistrationStudentDTO registrationStudentDTO) {
+        log.debug("REST Request to register student : {}", registrationStudentDTO);
+        return studentService.registerStudent(registrationStudentDTO);
+    }
 }

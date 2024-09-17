@@ -1,5 +1,6 @@
 package ci.digitalacademy.monetab.services;
 
+import ci.digitalacademy.monetab.models.AppSetting;
 import ci.digitalacademy.monetab.services.dto.AppSettingDTO;
 
 import java.util.List;
@@ -27,7 +28,7 @@ public interface AppSettingService {
 
     boolean isConfigured();
 
-    void saveSettings(AppSettingDTO appSettingDTO);
+    AppSetting saveSettings(AppSettingDTO appSettingDTO);
     AppSettingDTO getCurrentSettings();
 
 }

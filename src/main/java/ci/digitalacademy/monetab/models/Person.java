@@ -3,8 +3,6 @@ package ci.digitalacademy.monetab.models;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.time.Instant;
-
 @Getter
 @Setter
 @NoArgsConstructor
@@ -41,9 +39,13 @@ public abstract class Person {
     @Column(name = "genre",nullable = false)
     private String genre;
 
-    @OneToOne(mappedBy = "person")
+    @OneToOne
     private Student student;
 
-    @OneToOne(mappedBy = "person")
+    @OneToOne
     private Teacher teacher;
+    @OneToOne
+    private Address address;
+    @OneToOne
+    private User user;
 }

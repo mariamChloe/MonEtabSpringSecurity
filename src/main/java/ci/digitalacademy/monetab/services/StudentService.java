@@ -1,6 +1,7 @@
 package ci.digitalacademy.monetab.services;
 
 
+import ci.digitalacademy.monetab.services.dto.RegistrationStudentDTO;
 import ci.digitalacademy.monetab.services.dto.StudentDTO;
 
 import java.util.List;
@@ -22,4 +23,7 @@ public interface StudentService {
     boolean existsById(Long id);
 
     void delete(Long id);
+
+    RegistrationStudentDTO registerStudent(RegistrationStudentDTO registrationStudentDTO);
+
 }

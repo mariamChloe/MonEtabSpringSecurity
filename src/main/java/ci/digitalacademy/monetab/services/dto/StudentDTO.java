@@ -1,11 +1,5 @@
 package ci.digitalacademy.monetab.services.dto;
 
-import ci.digitalacademy.monetab.models.Absence;
-import ci.digitalacademy.monetab.models.Person;
-import ci.digitalacademy.monetab.models.StudentCards;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -20,7 +14,7 @@ public class StudentDTO extends PersonnDTO {
 
     private String classe;
 
-    private LocalDate datenaiss;
+    private LocalDate birth;
 
     private Integer age;
 
@@ -29,4 +23,10 @@ public class StudentDTO extends PersonnDTO {
     private StudentCardsDTO studentCardsDTO;
 
     private PersonnDTO personnDTO;
+
+    public void setUser(UserDTO user) {
+    }
+
+    public void set(AddressDTO address) {
+    }
 }
